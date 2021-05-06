@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import { useQuery } from '@apollo/client'
@@ -29,9 +29,12 @@ function Root() {
     setFields([{ name: faker.name.findName(), id: nanoid() }, ...fields])
   }
 
+  const latestCount = useRef()
+  latestCount.current = count
+
   function handleAlertClick() {
     setTimeout(() => {
-      alert(`You clicked ${count} times`)
+      alert(`You clicked ${latestCount.current} times`)
     }, 2500)
   }
 
@@ -69,7 +72,7 @@ function Root() {
 
         <h4>Closures</h4>
         <p>You clicked {count} times</p>
-        <button type="button" onClick={() => setCount(count + 1)}>
+        <button type="button" onClick={() => setCount(prev => prev + 1)}>
           Click me
         </button>
         <button type="button" onClick={handleAlertClick}>
