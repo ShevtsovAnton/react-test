@@ -7,7 +7,7 @@ import arrayMove from 'array-move'
 
 import postQuery from 'GraphQL/Queries/post.graphql'
 
-import { ROOT } from 'Router/routes'
+import { POST, ROOT } from 'Router/routes'
 
 import {
   Back,
@@ -18,6 +18,8 @@ import {
   PostComment,
   PostContainer,
 } from './styles'
+
+import postsQuery from '../../GraphQL/Queries/posts.graphql'
 
 const SortableContainer = sortableContainer(({ children }) => (
   <div>{children}</div>
@@ -39,6 +41,9 @@ function Post() {
   const handleSortEnd = ({ oldIndex, newIndex }) => {
     setComments(arrayMove(comments, newIndex, oldIndex))
   }
+
+  const { data: allPosts } = useQuery(postsQuery)
+  const totalPostsCount = allPosts?.posts.meta.totalCount
 
   const { data, loading } = useQuery(postQuery, { variables: { id: postId } })
 
@@ -64,7 +69,22 @@ function Post() {
               <PostAuthor>by {post.user.name}</PostAuthor>
               <PostBody mt={2}>{post.body}</PostBody>
             </PostContainer>
-            <div>Next/prev here</div>
+            <div>
+              <button
+                disabled={postId === '1'}
+                type="button"
+                onClick={() => history.push(POST(postId - 1))}
+              >
+                Prev
+              </button>
+              <button
+                disabled={postId === String(totalPostsCount)}
+                type="button"
+                onClick={() => history.push(POST(Number(postId) + 1))}
+              >
+                Next
+              </button>
+            </div>
           </Column>
 
           <Column>
