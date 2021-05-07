@@ -11,7 +11,7 @@ export const Container = styled.div`
 `
 
 export const Column = styled.div`
-  width: 30%;
+  width: 40%;
   min-height: 100vh;
   padding: 16px;
 `
@@ -39,4 +39,36 @@ export const PostBody = styled.div`
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: normal;
+`
+
+export const StyledPaginateContainer = styled.div`
+  .paginationButtons {
+    width: 80%;
+    height: 40px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+  }
+
+  .paginationButtons a {
+    padding: 10px;
+    margin: 8px;
+    border: 1px solid #2b2eff;
+    color: #2b2eff;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .paginationButtons a:hover {
+    color: white;
+    background-color: #2b2eff;
+  }
+  .paginationActive a {
+    color: white;
+    background-color: #2b2eff;
+  }
+
+  .paginationDisabled {
+    color: gray;
+  }
 `
