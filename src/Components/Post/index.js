@@ -39,7 +39,7 @@ function Post() {
   const handleClick = () => history.push(ROOT)
 
   const handleSortEnd = ({ oldIndex, newIndex }) => {
-    setComments(arrayMove(comments, newIndex, oldIndex))
+    setComments(arrayMove(comments, oldIndex, newIndex ))
   }
 
   const { data: allPosts } = useQuery(postsQuery)
