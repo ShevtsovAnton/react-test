@@ -12783,7 +12783,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"prop-types@npm:15.7.2, prop-types@npm:^15.5.7, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
+"prop-types@npm:15.7.2, prop-types@npm:^15.5.7, prop-types@npm:^15.6.1, prop-types@npm:^15.6.2, prop-types@npm:^15.7.2":
   version: 15.7.2
   resolution: "prop-types@npm:15.7.2"
   dependencies:
@@ -13070,6 +13070,16 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"react-hooks-paginator@npm:^0.4.4":
+  version: 0.4.4
+  resolution: "react-hooks-paginator@npm:0.4.4"
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: 1055292b86ad329edaaa3f11bdbcc22970826b5055ae70a4193a58cb2bd7146a9277abf57c66029985637dd1f5c13050db1dba97fa050e72044f79f1c10d0d5e
+  languageName: node
+  linkType: hard
+
 "react-is@npm:^16.6.0, react-is@npm:^16.7.0, react-is@npm:^16.8.1":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
@@ -13081,6 +13091,17 @@ fsevents@^1.2.7:
   version: 17.0.1
   resolution: "react-is@npm:17.0.1"
   checksum: 5a83dfc78e7adcb93d632bf367b0733db650e3abd2e9c57c33b87e50d201212c1884b0d7bcf13e692f1556189fa1b87f9f3e0ba10fe858fd6aebe83ed4fcd1ea
+  languageName: node
+  linkType: hard
+
+"react-paginate@npm:7.1.2":
+  version: 7.1.2
+  resolution: "react-paginate@npm:7.1.2"
+  dependencies:
+    prop-types: ^15.6.1
+  peerDependencies:
+    react: ^16.0.0 || ^17.0.0
+  checksum: 9ec94b51be5e9ebe2ab548262e8e782b9fc3c919ce44e88118cdf50a99b97104686cd2c5aedcac6a369f3d1edc9f4f62a931365346e093f099d48529573fbcda
   languageName: node
   linkType: hard
 
@@ -14682,6 +14703,8 @@ resolve@1.18.1:
     prop-types: 15.7.2
     react: 17.0.1
     react-dom: 17.0.1
+    react-hooks-paginator: ^0.4.4
+    react-paginate: 7.1.2
     react-router: 5.2.0
     react-router-config: 5.1.1
     react-router-dom: 5.2.0

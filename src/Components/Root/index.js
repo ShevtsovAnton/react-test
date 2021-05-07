@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react'
+import ReactPaginate from 'react-paginate'
 import { NavLink } from 'react-router-dom'
 
 import { useQuery } from '@apollo/client'
@@ -9,7 +10,14 @@ import postsQuery from 'GraphQL/Queries/posts.graphql'
 
 import { POST } from 'Router/routes'
 
-import { Column, Container, Post, PostAuthor, PostBody } from './styles'
+import {
+  Column,
+  Container,
+  Post,
+  PostAuthor,
+  PostBody,
+  StyledPaginateContainer,
+} from './styles'
 
 import ExpensiveTree from '../ExpensiveTree'
 
@@ -21,9 +29,21 @@ function Root() {
       id: nanoid(),
     },
   ])
-
   const [value, setValue] = useState('')
-  const { data, loading } = useQuery(postsQuery)
+  const [pageNumber, setPageNumber] = useState(0)
+  const postsPerPage = 10
+
+  const { data, loading } = useQuery(postsQuery, {
+    variables: { page: pageNumber, limit: postsPerPage },
+  })
+  const posts = data?.posts.data || []
+  const totalPostsCount = data?.posts?.meta.totalCount || 0
+
+  const pageCount = Math.floor(totalPostsCount / postsPerPage)
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected)
+  }
 
   function handlePush() {
     setFields([{ name: faker.name.findName(), id: nanoid() }, ...fields])
@@ -38,8 +58,6 @@ function Root() {
     }, 2500)
   }
 
-  const posts = data?.posts.data || []
-
   return (
     <Container>
       <Column>
@@ -47,7 +65,7 @@ function Root() {
         {loading
           ? 'Loading...'
           : posts.map(post => (
-              <Post mx={4}>
+              <Post key={post.id} mx={4}>
                 <NavLink href={POST(post.id)} to={POST(post.id)}>
                   {post.title}
                 </NavLink>
@@ -55,7 +73,21 @@ function Root() {
                 <PostBody>{post.body}</PostBody>
               </Post>
             ))}
-        <div>Pagination here</div>
+        <StyledPaginateContainer>
+          <ReactPaginate
+            activeClassName="paginationActive"
+            containerClassName="paginationButtons"
+            disabledClassName="paginationDisabled"
+            marginPagesDisplayed={1}
+            nextLabel="Next"
+            nextLinkClassName="nextButton"
+            pageCount={pageCount}
+            pageRangeDisplayed={2}
+            previousLabel="Previous"
+            previousLinkClassName="previousButton"
+            onPageChange={changePage}
+          />
+        </StyledPaginateContainer>
       </Column>
       <Column>
         <h4>Slow rendering</h4>
